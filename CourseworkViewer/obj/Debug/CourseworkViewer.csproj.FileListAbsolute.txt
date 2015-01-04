@@ -1,0 +1,9 @@
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe.config
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.pdb
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csprojResolveAssemblyReference.cache
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Form1.resources
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Properties.Resources.resources
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csproj.GenerateResource.Cache
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.exe
+D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.pdb
