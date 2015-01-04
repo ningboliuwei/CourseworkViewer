@@ -31,7 +31,9 @@ namespace CourseworkViewer
 
 		private List<string> studentNameList = new List<string>();
 
-		private List<CourseworkRecord> records = new List<CourseworkRecord>(); 
+		private List<CourseworkRecord> records = new List<CourseworkRecord>();
+
+		//private List<CourseworkRecord> resultView = new List<CourseworkRecord>(); 
 
 		public Form1()
 		{
@@ -49,13 +51,14 @@ namespace CourseworkViewer
 
 				this.ReadConfigFile(scanDirectoryPath + "\\config.txt");
 				ShowAllFiles(scanDirectoryPath + "\\upload\\");
-				this.ChangeColor();
+				this.ChangeColor(1);
 			}
 		}
 
 		private void ShowAllFiles(string directoryPath)
 		{
 			List<DataRow> rows = new List<DataRow>();
+			List<CourseworkRecord> sameRows = new List<CourseworkRecord>();
 
 
 			try
@@ -106,10 +109,12 @@ namespace CourseworkViewer
 						string currentStudentName = currentStudentPath.Substring(currentStudentPath.LastIndexOf("\\") + 1);
 
 						//foreach (DataRow currentRow in filesDataTable.Rows)
-						foreach(CourseworkRecord record in records)
+						foreach (CourseworkRecord record in records)
+						//for(int l = 0; l < records.Count; l++)
 						{
+							//CourseworkRecord record = records[l];
 							//if ((currentRow[1] + "+" + currentRow[2]) == currentStudentName && currentRow[3].ToString() == currentCourseworkName)
-							if((record.Sno + "+" + record.Sname)==currentStudentName && record.CName == currentCourseworkName)
+							if ((record.Sno + "+" + record.Sname) == currentStudentName && record.CName == currentCourseworkName)
 							{
 								string[] courseworkFileList = Directory.GetFiles(currentStudentPath);
 
@@ -124,7 +129,7 @@ namespace CourseworkViewer
 										//currentRow[0] = Convert.ToString(filesDataTable.Rows. + 1);//序号
 										//currentRow[3] = currentCourseworkName; //所属作业名称
 										//currentRow[5] = currentCourseworkFileName; //提交的文件名
-										record.FileName = currentCourseworkFileName; 
+										record.FileName = currentCourseworkFileName;
 										//currentRow[1] = currentCourseworkFileName.Split('+')[0]; //学号
 										//currentRow[2] = currentCourseworkFileName.Split('+')[1]; //姓名
 										//currentRow[4] = currentCourseworkFileName.Split('+')[2]; //提交时间
@@ -139,7 +144,7 @@ namespace CourseworkViewer
 										sameRecored.CName = record.CName;
 										sameRecored.SubmitTime = currentCourseworkFileName.Split('+')[2];
 										sameRecored.FileName = currentCourseworkFileName;
-										
+
 
 										//sameRow[0] = currentRow[0];
 										//sameRow[1] = currentRow[1];
@@ -150,7 +155,7 @@ namespace CourseworkViewer
 
 										//filesDataTable.Rows.Add(sameRow);
 										//rows.Add(sameRow);
-										records.Add(sameRecored);
+										sameRows.Add(sameRecored);
 									}
 									//filesDataTable.Rows.Add(currentRow);
 								}
@@ -163,12 +168,32 @@ namespace CourseworkViewer
 				//{
 				//	filesDataTable.Rows.Add(row);
 				//}
-
-				
+				foreach (CourseworkRecord sameRow in sameRows)
+				{
+					records.Add(sameRow);
+				}
 
 				//filesDataTable.DefaultView.Sort = "学号 ASC, 该文件所属的作业名称 ASC, 文件提交时间 ASC";
 				//dataGridView1.DataSource = filesDataTable.DefaultView;
-				dataGridView1.DataSource = records;
+
+				IEnumerable<CourseworkRecord> resultView = from r in records
+														   orderby r.Sno,r.CName,r.SubmitTime
+														   select
+															   new CourseworkRecord()
+															   {
+																   Sn = r.Sn,
+																   Sno = r.Sno,
+																   Sname = r.Sname,
+																   CName = r.CName,
+																   SubmitTime = r.SubmitTime,
+																   FileName = r.FileName
+															   };
+
+
+
+				dataGridView1.DataSource = resultView.ToList();
+
+
 			}
 			catch (Exception ex)
 			{
@@ -176,7 +201,7 @@ namespace CourseworkViewer
 			}
 		}
 
-		private void ChangeColor()
+		private void ChangeColor(int keyIndex)
 		{
 			List<Color> colorList = new List<Color>();
 			colorList.Add(Color.LightBlue);
@@ -191,10 +216,10 @@ namespace CourseworkViewer
 
 			dataGridView1.Rows[0].Cells[0].Value = no;
 
-			for (int i = 1; i < dataGridView1.Rows.Count - 1; i++)
+			for (int i = 1; i < dataGridView1.Rows.Count; i++)
 			{
 				no++;
-				if (dataGridView1.Rows[i].Cells[1].Value.ToString() != dataGridView1.Rows[i - 1].Cells[1].Value.ToString())
+				if (dataGridView1.Rows[i].Cells[keyIndex].Value.ToString() != dataGridView1.Rows[i - 1].Cells[keyIndex].Value.ToString())
 				{
 					no = 1;
 					colorIndex++;
@@ -291,6 +316,48 @@ namespace CourseworkViewer
 					sr.Close();
 				}
 			}
+		}
+
+		private void 按学号排序NToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			IEnumerable<CourseworkRecord> resultView = from r in records
+													   orderby r.Sno, r.CName, r.SubmitTime
+													   select
+														   new CourseworkRecord()
+														   {
+															   Sn = r.Sn,
+															   Sno = r.Sno,
+															   Sname = r.Sname,
+															   CName = r.CName,
+															   SubmitTime = r.SubmitTime,
+															   FileName = r.FileName
+														   };
+
+
+
+			dataGridView1.DataSource = resultView.ToList();
+			this.ChangeColor(1);
+		}
+
+		private void 按每次作业时间先后排序TToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			IEnumerable<CourseworkRecord> resultView = from r in records
+													   orderby r.CName, r.SubmitTime,r.Sno
+													   select
+														   new CourseworkRecord()
+														   {
+															   Sn = r.Sn,
+															   Sno = r.Sno,
+															   Sname = r.Sname,
+															   CName = r.CName,
+															   SubmitTime = r.SubmitTime,
+															   FileName = r.FileName
+														   };
+
+
+
+			dataGridView1.DataSource = resultView.ToList();
+			this.ChangeColor(3);
 		}
 	}
 }

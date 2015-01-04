@@ -16,3 +16,12 @@ C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csproj.Ge
 C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Form1.resources
 C:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe
 C:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.pdb
+E:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe.config
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.exe
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.pdb
+E:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe
+E:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.pdb
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csprojResolveAssemblyReference.cache
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Form1.resources
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Properties.Resources.resources
+E:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csproj.GenerateResource.Cache
