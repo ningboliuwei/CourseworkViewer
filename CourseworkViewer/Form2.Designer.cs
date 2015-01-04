@@ -1,6 +1,6 @@
 ﻿namespace CourseworkViewer
 {
-	partial class Form1
+	partial class Form2
 	{
 		/// <summary>
 		/// 必需的设计器变量。
@@ -145,7 +145,7 @@
 			this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.Name = "Form1";
+			this.Name = "Form2";
 			this.Text = "CourseworkViewer";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.tableLayoutPanel1.ResumeLayout(false);

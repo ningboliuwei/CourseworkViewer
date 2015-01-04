@@ -7,3 +7,12 @@ D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkView
 D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csproj.GenerateResource.Cache
 D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.exe
 D:\VS2008\My Programs\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.pdb
+C:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe.config
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.exe
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.pdb
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csprojResolveAssemblyReference.cache
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Properties.Resources.resources
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.csproj.GenerateResource.Cache
+C:\GitHub\CourseworkViewer\CourseworkViewer\obj\Debug\CourseworkViewer.Form1.resources
+C:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.exe
+C:\GitHub\CourseworkViewer\CourseworkViewer\bin\Debug\CourseworkViewer.pdb

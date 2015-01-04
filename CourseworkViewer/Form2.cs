@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace CourseworkViewer
 {
-	using System.IO;
+	
 
-	public partial class Form1 : Form
+	public partial class Form2 : Form
 	{
 		public class CourseworkRecord
 		{
@@ -24,16 +25,15 @@ namespace CourseworkViewer
 			public string FileName { get; set; }
 		}
 
-
 		private string scanDirectoryPath = ""; //用户选择的上传文件夹（upload文件夹）
 
 		private List<string> courseworkNameList = new List<string>();
 
 		private List<string> studentNameList = new List<string>();
 
-		private List<CourseworkRecord> records = new List<CourseworkRecord>(); 
+		List<CourseworkRecord> records = new List<CourseworkRecord>();
 
-		public Form1()
+		public Form2()
 		{
 			InitializeComponent();
 		}
@@ -55,7 +55,7 @@ namespace CourseworkViewer
 
 		private void ShowAllFiles(string directoryPath)
 		{
-			List<DataRow> rows = new List<DataRow>();
+			
 
 
 			try
@@ -73,17 +73,12 @@ namespace CourseworkViewer
 				{
 					foreach (string courseworkName in courseworkNameList)
 					{
-						//DataRow datarow = filesDataTable.NewRow();
-						CourseworkRecord record = new CourseworkRecord();
-						//datarow[1] = studentName.Split('+')[0];
-						record.Sno = studentName.Split('+')[0];
-						//datarow[2] = studentName.Split('+')[1];
-						record.Sname = studentName.Split('+')[1];
-						//datarow[3] = courseworkName;
-						record.CName = courseworkName;
+						DataRow datarow = filesDataTable.NewRow();
+						datarow[1] = studentName.Split('+')[0];
+						datarow[2] = studentName.Split('+')[1];
+						datarow[3] = courseworkName;
 
-						//filesDataTable.Rows.Add(datarow);
-						records.Add(record);
+						filesDataTable.Rows.Add(datarow);
 					}
 				}
 
@@ -105,11 +100,9 @@ namespace CourseworkViewer
 						string currentStudentPath = studentPathList[j];
 						string currentStudentName = currentStudentPath.Substring(currentStudentPath.LastIndexOf("\\") + 1);
 
-						//foreach (DataRow currentRow in filesDataTable.Rows)
-						foreach(CourseworkRecord record in records)
+						foreach (DataRow currentRow in filesDataTable.Rows)
 						{
-							//if ((currentRow[1] + "+" + currentRow[2]) == currentStudentName && currentRow[3].ToString() == currentCourseworkName)
-							if((record.Sno + "+" + record.Sname)==currentStudentName && record.CName == currentCourseworkName)
+							if ((currentRow[1] + "+" + currentRow[2]) == currentStudentName && currentRow[3].ToString() == currentCourseworkName)
 							{
 								string[] courseworkFileList = Directory.GetFiles(currentStudentPath);
 
@@ -123,34 +116,23 @@ namespace CourseworkViewer
 									{
 										//currentRow[0] = Convert.ToString(filesDataTable.Rows. + 1);//序号
 										//currentRow[3] = currentCourseworkName; //所属作业名称
-										//currentRow[5] = currentCourseworkFileName; //提交的文件名
-										record.FileName = currentCourseworkFileName; 
+										currentRow[5] = currentCourseworkFileName; //提交的文件名
 										//currentRow[1] = currentCourseworkFileName.Split('+')[0]; //学号
 										//currentRow[2] = currentCourseworkFileName.Split('+')[1]; //姓名
-										//currentRow[4] = currentCourseworkFileName.Split('+')[2]; //提交时间
-										record.SubmitTime = currentCourseworkFileName.Split('+')[2];
+										currentRow[4] = currentCourseworkFileName.Split('+')[2]; //提交时间
 									}
 									else
 									{
-										//DataRow sameRow = filesDataTable.NewRow(); //同一个作业超过提交一个文件
-										CourseworkRecord sameRecored = new CourseworkRecord();
-										sameRecored.Sno = record.Sno;
-										sameRecored.Sname = record.Sname;
-										sameRecored.CName = record.CName;
-										sameRecored.SubmitTime = currentCourseworkFileName.Split('+')[2];
-										sameRecored.FileName = currentCourseworkFileName;
-										
-
-										//sameRow[0] = currentRow[0];
-										//sameRow[1] = currentRow[1];
-										//sameRow[2] = currentRow[2];
-										//sameRow[3] = currentRow[3];
-										//sameRow[4] = currentCourseworkFileName.Split('+')[2];
-										//sameRow[5] = currentCourseworkFileName;
+										DataRow sameRow = filesDataTable.NewRow(); //同一个作业超过提交一个文件
+										sameRow[0] = currentRow[0];
+										sameRow[1] = currentRow[1];
+										sameRow[2] = currentRow[2];
+										sameRow[3] = currentRow[3];
+										sameRow[4] = currentCourseworkFileName.Split('+')[2];
+										sameRow[5] = currentCourseworkFileName;
 
 										//filesDataTable.Rows.Add(sameRow);
-										//rows.Add(sameRow);
-										records.Add(sameRecored);
+										rows.Add(sameRow);
 									}
 									//filesDataTable.Rows.Add(currentRow);
 								}
@@ -159,16 +141,13 @@ namespace CourseworkViewer
 					}
 				}
 
-				//foreach (DataRow row in rows)
-				//{
-				//	filesDataTable.Rows.Add(row);
-				//}
+				foreach (DataRow row in rows)
+				{
+					filesDataTable.Rows.Add(row);
+				}
 
-				
-
-				//filesDataTable.DefaultView.Sort = "学号 ASC, 该文件所属的作业名称 ASC, 文件提交时间 ASC";
-				//dataGridView1.DataSource = filesDataTable.DefaultView;
-				dataGridView1.DataSource = records;
+				filesDataTable.DefaultView.Sort = "学号 ASC, 该文件所属的作业名称 ASC, 文件提交时间 ASC";
+				dataGridView1.DataSource = filesDataTable.DefaultView;
 			}
 			catch (Exception ex)
 			{
@@ -191,7 +170,7 @@ namespace CourseworkViewer
 
 			dataGridView1.Rows[0].Cells[0].Value = no;
 
-			for (int i = 1; i < dataGridView1.Rows.Count - 1; i++)
+			for (int i = 1; i < dataGridView1.Rows.Count-1; i++)
 			{
 				no++;
 				if (dataGridView1.Rows[i].Cells[1].Value.ToString() != dataGridView1.Rows[i - 1].Cells[1].Value.ToString())
@@ -206,7 +185,7 @@ namespace CourseworkViewer
 
 
 
-
+					
 					dataGridView1.Rows[i].Cells[0].Value = no;
 				}
 				else
@@ -224,7 +203,7 @@ namespace CourseworkViewer
 		//	//  对于C#的随机数，没什么好说的
 		//	//System.Threading.Thread.Sleep(RandomNum_First.Next(50));
 		//	Random RandomNum_Sencond = new Random(Guid.NewGuid().GetHashCode());
-
+			
 		//	//System.Threading.Thread.Sleep(RandomNum_First.Next(50));
 		//	Random RandomNum_Third = new Random(Guid.NewGuid().GetHashCode());
 
@@ -233,7 +212,7 @@ namespace CourseworkViewer
 		//	int int_Green = RandomNum_Sencond.Next(256);
 		//	//int int_Blue = (int_Red + int_Green < 400) ? 0 : 400 - int_Red - int_Green;
 		//	int int_Blue = RandomNum_Sencond.Next(256);
-
+			
 		//	//int_Blue = (int_Blue > 255) ? 255 : int_Blue;
 
 		//	return Color.FromArgb(int_Red, int_Green, int_Blue);
