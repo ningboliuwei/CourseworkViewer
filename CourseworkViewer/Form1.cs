@@ -177,7 +177,7 @@ namespace CourseworkViewer
 				//dataGridView1.DataSource = filesDataTable.DefaultView;
 
 				IEnumerable<CourseworkRecord> resultView = from r in records
-														   orderby r.Sno,r.CName,r.SubmitTime
+														   orderby r.Sno, r.CName, r.SubmitTime
 														   select
 															   new CourseworkRecord()
 															   {
@@ -342,7 +342,7 @@ namespace CourseworkViewer
 		private void 按每次作业时间先后排序TToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			IEnumerable<CourseworkRecord> resultView = from r in records
-													   orderby r.CName, r.SubmitTime,r.Sno
+													   orderby r.CName, r.SubmitTime, r.Sno
 													   select
 														   new CourseworkRecord()
 														   {
@@ -358,6 +358,37 @@ namespace CourseworkViewer
 
 			dataGridView1.DataSource = resultView.ToList();
 			this.ChangeColor(3);
+		}
+
+		private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			string courseworkName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+			string sno = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+			string sname = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+			string fileName = "";
+
+			if (dataGridView1.Rows[e.RowIndex].Cells[5].Value != null)
+			{
+				fileName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+			}
+
+
+			string filePath = string.Format("{0}\\upload\\{1}\\{2}+{3}\\{4}", scanDirectoryPath, courseworkName, sno, sname, fileName);
+
+			if (fileName != "")
+			{
+				System.Diagnostics.Process.Start(filePath);
+			}
+		}
+
+		private void 清空列表CToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			courseworkNameList.Clear();
+			studentNameList.Clear();
+			records.Clear();
+			dataGridView1.DataSource = records;
+
 		}
 	}
 }

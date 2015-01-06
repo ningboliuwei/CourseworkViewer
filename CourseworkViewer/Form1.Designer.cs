@@ -39,6 +39,7 @@
 			this.按每次作业时间先后排序TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.清空列表CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -75,7 +76,8 @@
 			// 文件FToolStripMenuItem
 			// 
 			this.文件FToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.选择文件夹DToolStripMenuItem});
+            this.选择文件夹DToolStripMenuItem,
+            this.清空列表CToolStripMenuItem});
 			this.文件FToolStripMenuItem.Name = "文件FToolStripMenuItem";
 			this.文件FToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
 			this.文件FToolStripMenuItem.Text = "文件(&F)";
@@ -137,6 +139,14 @@
 			this.dataGridView1.RowTemplate.Height = 24;
 			this.dataGridView1.Size = new System.Drawing.Size(667, 422);
 			this.dataGridView1.TabIndex = 1;
+			this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+			// 
+			// 清空列表CToolStripMenuItem
+			// 
+			this.清空列表CToolStripMenuItem.Name = "清空列表CToolStripMenuItem";
+			this.清空列表CToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.清空列表CToolStripMenuItem.Text = "清空列表(&C)";
+			this.清空列表CToolStripMenuItem.Click += new System.EventHandler(this.清空列表CToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -170,6 +180,7 @@
 		private System.Windows.Forms.ToolStripMenuItem 排序SToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 按学号排序NToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 按每次作业时间先后排序TToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 清空列表CToolStripMenuItem;
 	}
 }
 
